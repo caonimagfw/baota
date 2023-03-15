@@ -17,9 +17,8 @@ RUN mkdir -p /www/letsencrypt \
 RUN cd /home \
     && yum -y install wget openssh-server which curl iproute \
     && echo 'Port 63322' > /etc/ssh/sshd_config \
-    && wget https://raw.githubusercontent.com/8838/btpanel-v7.7.0/main/install/install_panel.sh \
+    && wget https://github.com/caonimagfw/btpanel-v7.7.0/raw/main/install/install_panel.sh \
     && bash install_panel.sh \
-    && echo y | bash install_panel.sh \
     && python /set_default.py \
     && echo '["linuxsys", "webssh"]' > /www/server/panel/config/index.json \
     && yum clean all
