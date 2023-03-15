@@ -15,11 +15,11 @@ RUN mkdir -p /www/letsencrypt \
     
 #更新系统 安装依赖 安装宝塔面板
 RUN cd /home \
-    && yum -y update \
-    && yum -y install wget openssh-server \
+    && yum -y install wget openssh-server which curl iproute \
     && echo 'Port 63322' > /etc/ssh/sshd_config \
-    && wget -O install.sh http://download.bt.cn/install/install_6.0.sh \
-    && echo y | bash install.sh \
+    && wget -O https://raw.githubusercontent.com/8838/btpanel-v7.7.0/main/install/install_panel.sh
+    && bash install_panel.sh
+    && echo y | bash install_panel.sh
     && python /set_default.py \
     && echo '["linuxsys", "webssh"]' > /www/server/panel/config/index.json \
     && yum clean all
@@ -28,4 +28,4 @@ WORKDIR /www/wwwroot
 CMD /entrypoint.sh
 EXPOSE 8888 888 21 20 443 80
 
-HEALTHCHECK --interval=5s --timeout=3s CMD curl -fs http://localhost:8888/ && curl -fs http://localhost/ || exit 1 
+HEALTHCHECK --interval=60s --timeout=5s CMD curl -fs http://localhost:8888/ && curl -fs http://localhost/ || exit 1 
