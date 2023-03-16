@@ -1,5 +1,5 @@
-FROM centos:7
-MAINTAINER pch18.cn
+FROM centos:7.9.2009
+MAINTAINER caonimagfw
 
 #设置entrypoint和letsencrypt映射到www文件夹下持久化
 COPY entrypoint.sh /entrypoint.sh
