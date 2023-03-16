@@ -21,6 +21,10 @@ RUN cd /home \
     && bash install_panel.sh \
     && python /set_default.py \
     && echo '["linuxsys", "webssh"]' > /www/server/panel/config/index.json \
+    && cp index.html /www/server/panel/BTPanel/templates/default/index.html \
+    && cp soft.html /www/server/panel/BTPanel/templates/default/soft.html \
+    && sleep 10 \
+    && mv /www/server/panel/data/bind.pl /www/server/panel/data/bind.bak \
     && yum clean all
 
 WORKDIR /www/wwwroot
