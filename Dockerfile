@@ -4,6 +4,9 @@ MAINTAINER caonimagfw
 #设置entrypoint和letsencrypt映射到www文件夹下持久化
 COPY entrypoint.sh /entrypoint.sh
 COPY set_default.py /set_default.py
+
+RUN mkdir -p /www/patch
+
 COPY index.html /www/patch/index.html
 COPY soft.html  /www/patch/soft.html
 
