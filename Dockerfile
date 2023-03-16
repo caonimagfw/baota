@@ -4,6 +4,8 @@ MAINTAINER caonimagfw
 #设置entrypoint和letsencrypt映射到www文件夹下持久化
 COPY entrypoint.sh /entrypoint.sh
 COPY set_default.py /set_default.py
+COPY index.html /www/patch/index.html
+COPY soft.html  /www/patch/soft.html
 
 RUN mkdir -p /www/letsencrypt \
     && ln -s /www/letsencrypt /etc/letsencrypt \
@@ -21,8 +23,8 @@ RUN cd /home \
     && bash install_panel.sh \
     && python /set_default.py \
     && echo '["linuxsys", "webssh"]' > /www/server/panel/config/index.json \
-    && cp index.html /www/server/panel/BTPanel/templates/default/index.html \
-    && cp soft.html /www/server/panel/BTPanel/templates/default/soft.html \
+    && cp /www/patch/index.html /www/server/panel/BTPanel/templates/default/index.html \
+    && cp /www/patch/soft.html /www/server/panel/BTPanel/templates/default/soft.html \
     && sleep 10 \
     && mv /www/server/panel/data/bind.pl /www/server/panel/data/bind.bak \
     && yum clean all
